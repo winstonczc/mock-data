@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 /**
@@ -71,11 +72,41 @@ public class FieldDataPool {
         return pv;
     }
 
+    public <T> PatternValues<T> type(Class<? extends T> cl, Function<String, T[]> valueFun) {
+        return type(cl, null, valueFun);
+    }
+
+    public <T> PatternValues<T> type(Class<? extends T> cl, String fieldName, Function<String, T[]> valueFun) {
+        PatternValues<T> pv = (PatternValues<T>) patternValuesMap.get(cl);
+        if (pv == null) {
+            pv = new PatternValues<>();
+            patternValuesMap.put(cl, pv);
+        }
+        if (valueFun == null) {
+            return pv;
+        } else if (fieldName == null) {
+            return pv.value(valueFun);
+        } else {
+            return pv.value(valueFun, fieldName);
+        }
+    }
+
+    public <C, T> PatternValues<T> like(SFunction<C, T> function, Function<String, T[]> valueFun) {
+        Field field = ReflectUtil.getFieldFromLambda(function);
+        return like((Class<T>) field.getType(), field.getName(), valueFun);
+    }
+
+    public <T> PatternValues<T> like(Class<? extends T> cl, String fieldName, Function<String, T[]> valueFun) {
+        PatternValues<T> pv = type(cl);
+        pv.value(valueFun, ".*" + fieldName + ".*", Pattern.CASE_INSENSITIVE);
+        return pv;
+    }
+
     public final class PatternValues<T> {
 
         private final ArrayList<Pattern> patterns;
 
-        private final ArrayList<T[]> values;
+        private final ArrayList<Object> values;
 
         public PatternValues() {
             this.patterns = new ArrayList<>();
@@ -88,20 +119,38 @@ public class FieldDataPool {
 
         public PatternValues<T> values(T[] values, String... regexes) {
             for (String regex : regexes) {
-                patterns.add(Pattern.compile(regex));
+                this.patterns.add(Pattern.compile(regex));
                 this.values.add(values);
             }
             return this;
         }
 
         public PatternValues<T> values(T[] values, String regex, int flags) {
-            patterns.add(Pattern.compile(regex, flags));
+            this.patterns.add(Pattern.compile(regex, flags));
             this.values.add(values);
             return this;
         }
 
+        public PatternValues<T> value(Function<String, T[]> valueFun) {
+            return value(valueFun, ".*");
+        }
+
+        public PatternValues<T> value(Function<String, T[]> valueFun, String... regexes) {
+            for (String regex : regexes) {
+                this.patterns.add(Pattern.compile(regex));
+                this.values.add(valueFun);
+            }
+            return this;
+        }
+
+        public PatternValues<T> value(Function<String, T[]> valueFun, String regex, int flags) {
+            this.patterns.add(Pattern.compile(regex, flags));
+            this.values.add(valueFun);
+            return this;
+        }
+
         public synchronized void addPatternValues(PatternValues<?> pv) {
-            for (Object[] value : pv.values) {
+            for (Object value : pv.values) {
                 this.values.add((T[]) value);
             }
             for (Pattern pattern : pv.patterns) {
@@ -129,7 +178,14 @@ public class FieldDataPool {
             for (int i = 0; i < patterns.size(); i++) {
                 Pattern pattern = patterns.get(i);
                 if (pattern.matcher(str).matches()) {
-                    return values.get(i);
+                    T[] valArr = null;
+                    Object valObj = values.get(i);
+                    if (Function.class.isAssignableFrom(valObj.getClass())) {
+                        valArr = (T[]) ((Function) valObj).apply(str);
+                    } else {
+                        valArr = (T[]) valObj;
+                    }
+                    return valArr;
                 }
             }
             return null;

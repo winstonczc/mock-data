@@ -487,7 +487,8 @@ public class CommonConfig {
     public <T> T randomDataFromDataPool(Class<?> cl, String key) {
         if (fieldDataPool == null) {
             return null;
-        } else if (key == null) {
+        }
+        if (key == null) {
             key = "";
         }
         T[] values = fieldDataPool.getValues(cl, key);

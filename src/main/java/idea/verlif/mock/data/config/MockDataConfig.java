@@ -16,7 +16,7 @@ public class MockDataConfig extends CommonConfig {
     /**
      * 属性填充的循环次数
      */
-    private StringCounter depthCounter;
+    private StringCounter maxDepthCounter;
 
     /**
      * 构建数组时的填充长度
@@ -36,7 +36,7 @@ public class MockDataConfig extends CommonConfig {
 
     public MockDataConfig copy() {
         MockDataConfig config = new MockDataConfig();
-        config.depthCounter = this.depthCounter;
+        config.maxDepthCounter = this.maxDepthCounter;
         config.arraySizeCreator = this.arraySizeCreator;
         config.fieldCreatorMap.putAll(this.fieldCreatorMap);
         config.interfaceCreatorMap.putAll(this.interfaceCreatorMap);
@@ -52,18 +52,18 @@ public class MockDataConfig extends CommonConfig {
         return config;
     }
 
-    public int getCreatingDepth(String key) {
-        if (depthCounter == null) {
+    public int getMaxCreatingDepth(String key) {
+        if (maxDepthCounter == null) {
             return DEFAULT_DEPTH;
         }
-        return depthCounter.getCount(key);
+        return maxDepthCounter.getCount(key);
     }
 
     public MockDataConfig creatingDepth(int defaultDepth) {
-        if (depthCounter == null) {
-            depthCounter = new StringCounter(defaultDepth);
+        if (maxDepthCounter == null) {
+            maxDepthCounter = new StringCounter(defaultDepth);
         } else {
-            depthCounter.setDefaultCount(defaultDepth);
+            maxDepthCounter.setDefaultCount(defaultDepth);
         }
         return this;
     }
@@ -75,7 +75,7 @@ public class MockDataConfig extends CommonConfig {
      * @param depth    属性的构建深度
      */
     public <T> MockDataConfig creatingDepth(SFunction<T, ?> function, int depth) {
-        setKeyDepth(NamingUtil.getKeyName(ReflectUtil.getFieldFromLambda(function)), depth);
+        setKeyMaxDepth(NamingUtil.getKeyName(ReflectUtil.getFieldFromLambda(function)), depth);
         return this;
     }
 
@@ -86,15 +86,15 @@ public class MockDataConfig extends CommonConfig {
      * @param depth 目标类的构建深度
      */
     public MockDataConfig creatingDepth(Class<?> cla, int depth) {
-        setKeyDepth(NamingUtil.getKeyName(cla), depth);
+        setKeyMaxDepth(NamingUtil.getKeyName(cla), depth);
         return this;
     }
 
-    private void setKeyDepth(String key, int depth) {
-        if (depthCounter == null) {
-            depthCounter = new StringCounter(DEFAULT_DEPTH);
+    private void setKeyMaxDepth(String key, int depth) {
+        if (maxDepthCounter == null) {
+            maxDepthCounter = new StringCounter(DEFAULT_DEPTH);
         }
-        depthCounter.setCount(key, depth);
+        maxDepthCounter.setCount(key, depth);
     }
 
     public int getArraySize(Class<?> cla) {

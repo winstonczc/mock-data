@@ -1,8 +1,9 @@
 package idea.verlif.mock.data.domain;
 
 import java.util.Date;
+import java.util.List;
 
-public class Person {
+public class Person implements Named {
 
     private String name;
 
@@ -19,6 +20,8 @@ public class Person {
     private Date birthday;
 
     private FRUIT favouriteFruit;
+
+    private List<Person> friends;
 
     public String getName() {
         return name;
@@ -82,6 +85,14 @@ public class Person {
 
     public void setFavouriteFruit(FRUIT favouriteFruit) {
         this.favouriteFruit = favouriteFruit;
+    }
+
+    public List<Person> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<Person> friends) {
+        this.friends = friends;
     }
 
     public enum FRUIT {

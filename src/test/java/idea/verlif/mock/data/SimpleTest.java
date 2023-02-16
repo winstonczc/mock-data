@@ -12,10 +12,18 @@ public class SimpleTest {
     @Test
     public void test() throws IOException, ClassNotFoundException {
         PropertiesDataPool dataPool = new PropertiesDataPool();
-        dataPool.load("src/test/resources/data-pool.properties");
-        MockDataCreator creator = new MockDataCreator();
-        creator.getConfig().forceNew(true).autoCascade(true).fieldDataPool(dataPool);
-        System.out.println(JSONObject.toJSONString(creator.mock(Person.class)));
+        //        dataPool.load("src/test/resources/data-pool.properties");
+        dataPool.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("data-pool.properties"));
+        MockDataCreator mdcreator = new MockDataCreator();
+        mdcreator.getConfig()
+                .forceNew(true)
+                .autoCascade(true)
+                .creatingDepth(2)
+                .setFieldDataPool(dataPool);
+        System.out.println(JSONObject.toJSONString(mdcreator.mock(Person.class)));
+
+        MockDataCreator.Creator creator = mdcreator.new Creator(mdcreator.getConfig());
+        creator.getDataCreator(Person.class);
     }
 
 }

@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2767781d-8ee1-4880-800c-51e249e78541" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/CommonConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/CommonConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/FieldDataPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/FieldDataPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/exception/MockDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/exception/MockDataException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/MockDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/MockDataTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/SimpleTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/domain/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/example/PropertiesDataPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/example/PropertiesDataPool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +56,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.2857143",
-    "settings.editor.selected.configurable": "MavenSettings"
+    "settings.editor.selected.configurable": "File.Encoding"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -65,7 +65,7 @@
       <recent name="idea.verlif.mock.data.creator.data" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LambdaTest">
+  <component name="RunManager" selected="JUnit.SimpleTest">
     <configuration name="LambdaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mock-data" />
       <extension name="coverage">
@@ -114,8 +114,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LambdaTest" />
         <item itemvalue="JUnit.SimpleTest" />
+        <item itemvalue="JUnit.LambdaTest" />
         <item itemvalue="JUnit.SimpleTest.test" />
       </list>
     </recent_temporary>

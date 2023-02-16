@@ -476,10 +476,17 @@ public class CommonConfig {
 
     /**
      * 设置配置属性数据池
+     */
+    public FieldDataPool getFieldDataPool() {
+        return this.fieldDataPool;
+    }
+
+    /**
+     * 设置配置属性数据池
      *
      * @param pool 属性数据池
      */
-    public CommonConfig fieldDataPool(FieldDataPool pool) {
+    public CommonConfig setFieldDataPool(FieldDataPool pool) {
         this.fieldDataPool = pool;
         return this;
     }

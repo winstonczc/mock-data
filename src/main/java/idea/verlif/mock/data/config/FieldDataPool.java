@@ -57,7 +57,7 @@ public class FieldDataPool {
         } else if (fieldName == null) {
             return pv.values(values);
         } else {
-            return pv.values(values, fieldName);
+            return pv.values(values, fieldName, Pattern.CASE_INSENSITIVE);
         }
     }
 
@@ -87,7 +87,7 @@ public class FieldDataPool {
         } else if (fieldName == null) {
             return pv.value(valueFun);
         } else {
-            return pv.value(valueFun, fieldName);
+            return pv.value(valueFun, fieldName, Pattern.CASE_INSENSITIVE);
         }
     }
 
@@ -175,7 +175,7 @@ public class FieldDataPool {
         }
 
         public T[] getValues(String str) {
-            for (int i = 0; i < patterns.size(); i++) {
+            for (int i = patterns.size() - 1; i >= 0; i--) {
                 Pattern pattern = patterns.get(i);
                 if (pattern.matcher(str).matches()) {
                     T[] valArr = null;

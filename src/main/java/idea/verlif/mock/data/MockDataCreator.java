@@ -356,12 +356,12 @@ public class MockDataCreator extends CommonConfig {
         }
 
         private int getCreatingDepth(String fieldKey, String claKey) {
-            int defaultDepth = mockConfig.getCreatingDepth(null);
-            int fieldDepth = mockConfig.getCreatingDepth(fieldKey);
+            int defaultDepth = mockConfig.getMaxCreatingDepth(null);
+            int fieldDepth = mockConfig.getMaxCreatingDepth(fieldKey);
             if (fieldDepth != defaultDepth) {
                 return fieldDepth;
             }
-            return mockConfig.getCreatingDepth(claKey);
+            return mockConfig.getMaxCreatingDepth(claKey);
         }
 
         private Class<?> getRealClass(Class<?> arrayClass) {
@@ -481,14 +481,15 @@ public class MockDataCreator extends CommonConfig {
                     LOOP_while:
                     while (cla != null) {
                         if (cla.isInterface()) {
-                            return getInterfaceCreator(cla);
-                        }
-                        Class<?>[] claInterfaces = cla.getInterfaces();
-                        for (Class<?> anInterface : claInterfaces) {
-                            creator = getInterfaceCreator(anInterface);
-                            if (anInterface != null) {
-                                break LOOP_while;
+                            creator = getInterfaceCreator(cla);
+                        } else {
+                            Class<?>[] claInterfaces = cla.getInterfaces();
+                            for (int i = 0; creator == null && i < claInterfaces.length; i++) {
+                                creator = getInterfaceCreator(claInterfaces[i]);
                             }
+                        }
+                        if (creator != null) {
+                            break;
                         }
                         cla = cla.getSuperclass();
                     }

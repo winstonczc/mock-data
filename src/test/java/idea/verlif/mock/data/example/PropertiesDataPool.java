@@ -4,9 +4,7 @@ import com.alibaba.fastjson2.JSONArray;
 import idea.verlif.mock.data.config.FieldDataPool;
 import idea.verlif.parser.ParamParserService;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.Map;
 import java.util.Properties;
@@ -29,7 +27,22 @@ public class PropertiesDataPool extends FieldDataPool {
 
     public void load(File file) throws IOException {
         Properties properties = new Properties();
-        properties.load(new FileReader(file));
+        FileReader fr = new FileReader(file);
+        properties.load(fr);
+        fr.close();
+        parseProperties(properties);
+    }
+
+    public void load(InputStream is) throws IOException {
+        Properties properties = new Properties();
+        InputStreamReader isr = new InputStreamReader(is);
+        properties.load(isr);
+        isr.close();
+        is.close();
+        parseProperties(properties);
+    }
+
+    private void parseProperties(Properties properties) {
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
             String key = (String) entry.getKey();
             String value = (String) entry.getValue();

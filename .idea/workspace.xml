@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2767781d-8ee1-4880-800c-51e249e78541" name="变更" comment="">
+    <list default="true" id="2767781d-8ee1-4880-800c-51e249e78541" name="变更" comment="[feat]:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/CommonConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/CommonConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/FieldDataPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/config/FieldDataPool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/MockDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/MockDataTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/SimpleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/domain/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/example/PropertiesDataPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/idea/verlif/mock/data/example/PropertiesDataPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/MockDataCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/idea/verlif/mock/data/MockDataCreator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

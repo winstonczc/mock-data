@@ -11,10 +11,7 @@ import idea.verlif.mock.data.domain.counter.StringCounter;
 import idea.verlif.mock.data.util.NamingUtil;
 import idea.verlif.mock.data.util.ReflectUtil;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -294,6 +291,9 @@ public class MockDataCreator extends CommonConfig {
             // 遍历属性进行填充
             List<Field> allFields = ReflectUtil.getAllFields(cla);
             for (Field field : allFields) {
+                if (Modifier.isFinal(field.getModifiers())) {
+                    continue;
+                }
                 Class<?> fieldCla = field.getType();
                 Class<?> realCla = getRealClass(fieldCla);
                 // 判断此属性是否支持构建
